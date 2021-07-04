@@ -1,0 +1,162 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;DISPLAYS AT THE GIVEN COORDINATES...
+    2 00000000         ;** INCREASE COORDINATES MANUALLY.. OR GICE COORDINATES
+    3 00000000         ;input:x-R4(0-83),y-ADRESS-R5(0-5), DATA -R12
+    4 00000000         ;output: DATA ON SCREEN
+    5 00000000         ;WAITS FOR FIFO TO GET EMPTY BEFORE GETTING OUT OF THE R
+                       OUTINE
+    6 00000000 40004300 
+                       GPIO_PORTA_DATA
+                               EQU              0x40004300
+    7 00000000 40008008 
+                       SSI0_DR EQU              0x40008008
+    8 00000000 4000800C 
+                       SSI0_SR EQU              0x4000800C
+    9 00000000         ;LABEL  DIRECTIVE VALUE  COMMENT
+   10 00000000                 AREA             routines, READONLY, CODE
+   11 00000000                 THUMB
+   12 00000000                 EXPORT           XDISPLAY
+   13 00000000                 EXTERN           fifo
+   14 00000000         
+   15 00000000         XDISPLAY
+                               PROC
+   16 00000000 E92D 5033       PUSH{LR,R1,R0,r4,r5,r12}
+   17 00000004         ;make D/c low.. command
+   18 00000004 4910            LDR              R1,=GPIO_PORTA_DATA
+   19 00000006 6808            LDR              R0,[R1]
+   20 00000008 F020 0080       BIC              R0,#0x80
+   21 0000000C 6008            STR              R0,[R1]
+   22 0000000E         
+   23 0000000E         ;SET X, Y
+   24 0000000E 490F            LDR              R1,=SSI0_DR
+   25 00000010         
+   26 00000010 F045 0540       ORR              R5,#0x40    ;y-address  R5
+   27 00000014 600D            STR              R5,[R1]
+   28 00000016 F7FF FFFE       BL               fifo
+   29 0000001A         
+   30 0000001A F044 0480       ORR              R4,#0x80    ;x-address  R4
+   31 0000001E 600C            STR              R4,[R1]
+   32 00000020 F7FF FFFE       BL               fifo
+   33 00000024         
+   34 00000024         ;write data to screen.. change to display ... D/C high
+   35 00000024 4908            LDR              R1,=GPIO_PORTA_DATA
+   36 00000026 6808            LDR              R0,[R1]
+   37 00000028 F040 0080       ORR              R0,#0x80
+   38 0000002C 6008            STR              R0,[R1]
+   39 0000002E         
+   40 0000002E         ;data to be written
+   41 0000002E 4907            LDR              R1,=SSI0_DR
+   42 00000030 F8C1 C000       STR              R12,[R1]    ;DATA TO BE WRITTEN
+                                                             MUST BE IN R12
+   43 00000034         ;check fifo if EMPTY OR NOT/ BUSY
+   44 00000034 4906            LDR              R1,=SSI0_SR
+   45 00000036 6808    check   LDR              R0,[R1]
+   46 00000038 F010 0010       ANDS             R0,#0x10
+   47 0000003C D1FB            BNE              check
+   48 0000003E E8BD 5033       POP              {LR,R1,R0,r4,r5,r12}
+   49 00000042 F104 0401       ADD              r4,#1
+   50 00000046 4770            BX               LR
+   51 00000048                 ENDP
+   52 00000048                 ALIGN
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   53 00000048                 END
+              40004300 
+              40008008 
+              4000800C 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=".\objects\display_xincrement (1).d" -o".\objects\display_xincr
+ement (1).o" -I.\RTE\_Target_1 -IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device
+\Include\TM4C123 -IC:\Keil_v5\ARM\CMSIS\Include --predefine="__EVAL SETA 1" --p
+redefine="__UVISION_VERSION SETA 526" --predefine="TM4C123GH6PM SETA 1" --list=
+.\listings\display_xincrement (1).lst "display_Xincrement (1).s"
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+XDISPLAY 00000000
+
+Symbol: XDISPLAY
+   Definitions
+      At line 15 in file display_Xincrement
+   Uses
+      At line 12 in file display_Xincrement
+Comment: XDISPLAY used once
+check 00000036
+
+Symbol: check
+   Definitions
+      At line 45 in file display_Xincrement
+   Uses
+      At line 47 in file display_Xincrement
+Comment: check used once
+routines 00000000
+
+Symbol: routines
+   Definitions
+      At line 10 in file display_Xincrement
+   Uses
+      None
+Comment: routines unused
+3 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+GPIO_PORTA_DATA 40004300
+
+Symbol: GPIO_PORTA_DATA
+   Definitions
+      At line 6 in file display_Xincrement
+   Uses
+      At line 18 in file display_Xincrement
+      At line 35 in file display_Xincrement
+
+SSI0_DR 40008008
+
+Symbol: SSI0_DR
+   Definitions
+      At line 7 in file display_Xincrement
+   Uses
+      At line 24 in file display_Xincrement
+      At line 41 in file display_Xincrement
+
+SSI0_SR 4000800C
+
+Symbol: SSI0_SR
+   Definitions
+      At line 8 in file display_Xincrement
+   Uses
+      At line 44 in file display_Xincrement
+Comment: SSI0_SR used once
+3 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+fifo 00000000
+
+Symbol: fifo
+   Definitions
+      At line 13 in file display_Xincrement
+   Uses
+      At line 28 in file display_Xincrement
+      At line 32 in file display_Xincrement
+
+1 symbol
+343 symbols in table

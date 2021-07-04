@@ -1,0 +1,408 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000         ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+                       :::::::::::::::::::::::::
+    3 00000000         ;   ;display message
+    4 00000000         ;   ;lose: you lose loser!
+    5 00000000         ;   ;lose
+    6 00000000         ;   ;y
+    7 00000000         ;loose  MOV   R4,#15
+    8 00000000         ;   MOV   R5,#1
+    9 00000000         ;   MOV   R12,#1
+   10 00000000         ;   BL   XDISPLAY
+   11 00000000         ;   MOV   R12,#2
+   12 00000000         ;   BL   XDISPLAY
+   13 00000000         ;   MOV   R12,#4
+   14 00000000         ;   BL   XDISPLAY
+   15 00000000         ;   MOV   R12,#0xf8
+   16 00000000         ;   BL   XDISPLAY
+   17 00000000         ;   MOV   R12,#4
+   18 00000000         ;   BL   XDISPLAY
+   19 00000000         ;   MOV   R12,#2
+   20 00000000         ;   BL   XDISPLAY
+   21 00000000         ;   MOV   R12,#1
+   22 00000000         ;   BL   XDISPLAY
+   23 00000000         ;   ;1 pixel line gap
+   24 00000000         ;   MOV   R12,#0
+   25 00000000         ;   BL   XDISPLAY
+   26 00000000         ;   ; O
+   27 00000000         ;   MOV   R12,#0xff
+   28 00000000         ;   BL   XDISPLAY
+   29 00000000         ;   MOV   R12,#0x81
+   30 00000000         ;   BL   XDISPLAY
+   31 00000000         ;   BL   XDISPLAY
+   32 00000000         ;   BL   XDISPLAY
+   33 00000000         ;   BL   XDISPLAY
+   34 00000000         ;   MOV   R12,#0xff
+   35 00000000         ;   BL   XDISPLAY
+   36 00000000         ;   ;1 pixel line gap
+   37 00000000         ;   MOV   R12,#0
+   38 00000000         ;   BL   XDISPLAY
+   39 00000000         ;   ;U
+   40 00000000         ;   MOV   R12,#0xff
+   41 00000000         ;   BL   XDISPLAY
+   42 00000000         ;   MOV   R12,#0x80
+   43 00000000         ;   BL   XDISPLAY
+   44 00000000         ;   BL   XDISPLAY
+   45 00000000         ;   BL   XDISPLAY
+   46 00000000         ;   BL   XDISPLAY
+   47 00000000         ;   MOV   R12,#0xff
+   48 00000000         ;   BL   XDISPLAY
+   49 00000000         ;   ;1 pixel line gap
+   50 00000000         ;   MOV   R12,#0
+   51 00000000         ;   BL   XDISPLAY
+   52 00000000         ;   ;1 pixel line gap
+   53 00000000         ;   MOV   R12,#0
+   54 00000000         ;   BL   XDISPLAY
+   55 00000000         ;   ;1 pixel line gap
+   56 00000000         ;   MOV   R12,#0
+   57 00000000         ;   BL   XDISPLAY
+   58 00000000         ;   ;1 pixel line gap
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   59 00000000         ;   MOV   R12,#0
+   60 00000000         ;   BL   XDISPLAY
+   61 00000000         ;   
+   62 00000000         ;   ;L
+   63 00000000         ;   MOV   R12,#0xff
+   64 00000000         ;   BL   XDISPLAY
+   65 00000000         ;   MOV   R12,#0x80
+   66 00000000         ;   BL   XDISPLAY
+   67 00000000         ;   BL   XDISPLAY
+   68 00000000         ;   BL   XDISPLAY
+   69 00000000         ;   BL   XDISPLAY
+   70 00000000         ;   ;1 pixel line gap
+   71 00000000         ;   MOV   R12,#0
+   72 00000000         ;   BL   XDISPLAY
+   73 00000000         ;   ; O
+   74 00000000         ;   MOV   R12,#0xff
+   75 00000000         ;   BL   XDISPLAY
+   76 00000000         ;   MOV   R12,#0x81
+   77 00000000         ;   BL   XDISPLAY
+   78 00000000         ;   BL   XDISPLAY
+   79 00000000         ;   BL   XDISPLAY
+   80 00000000         ;   BL   XDISPLAY
+   81 00000000         ;   MOV   R12,#0xff
+   82 00000000         ;   BL   XDISPLAY
+   83 00000000         ;   ;1 pixel line gap
+   84 00000000         ;   MOV   R12,#0
+   85 00000000         ;   BL   XDISPLAY
+   86 00000000         ;   ;S
+   87 00000000         ;   MOV   R12,#0x1f
+   88 00000000         ;   BL   XDISPLAY
+   89 00000000         ;   MOV   R12,#0x91
+   90 00000000         ;   BL   XDISPLAY
+   91 00000000         ;   BL   XDISPLAY
+   92 00000000         ;   BL   XDISPLAY
+   93 00000000         ;   BL   XDISPLAY
+   94 00000000         ;   MOV   R12,#0xf1
+   95 00000000         ;   BL   XDISPLAY
+   96 00000000         ;   ;1 pixel line gap
+   97 00000000         ;   MOV   R12,#0
+   98 00000000         ;   BL   XDISPLAY
+   99 00000000         ;   ;E
+  100 00000000         ;   MOV   R12,#0xff
+  101 00000000         ;   BL   XDISPLAY
+  102 00000000         ;   MOV   R12,#0x91
+  103 00000000         ;   BL   XDISPLAY
+  104 00000000         ;   BL   XDISPLAY
+  105 00000000         ;   BL   XDISPLAY
+  106 00000000         ;   BL   XDISPLAY
+  107 00000000         ;   ;loser!
+  108 00000000         ;   MOV   R4,#26
+  109 00000000         ;   MOV   R5,#3
+  110 00000000         ;   ;L
+  111 00000000         ;   MOV   R12,#0xff
+  112 00000000         ;   BL   XDISPLAY
+  113 00000000         ;   MOV   R12,#0x80
+  114 00000000         ;   BL   XDISPLAY
+  115 00000000         ;   BL   XDISPLAY
+  116 00000000         ;   BL   XDISPLAY
+  117 00000000         ;   BL   XDISPLAY
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+  118 00000000         ;   ;1 pixel line gap
+  119 00000000         ;   MOV   R12,#0
+  120 00000000         ;   BL   XDISPLAY
+  121 00000000         ;   ; O
+  122 00000000         ;   MOV   R12,#0xff
+  123 00000000         ;   BL   XDISPLAY
+  124 00000000         ;   MOV   R12,#0x81
+  125 00000000         ;   BL   XDISPLAY
+  126 00000000         ;   BL   XDISPLAY
+  127 00000000         ;   BL   XDISPLAY
+  128 00000000         ;   BL   XDISPLAY
+  129 00000000         ;   MOV   R12,#0xff
+  130 00000000         ;   BL   XDISPLAY
+  131 00000000         ;   ;1 pixel line gap
+  132 00000000         ;   MOV   R12,#0
+  133 00000000         ;   BL   XDISPLAY
+  134 00000000         ;   ;S
+  135 00000000         ;   MOV   R12,#0x1f
+  136 00000000         ;   BL   XDISPLAY
+  137 00000000         ;   MOV   R12,#0x91
+  138 00000000         ;   BL   XDISPLAY
+  139 00000000         ;   BL   XDISPLAY
+  140 00000000         ;   BL   XDISPLAY
+  141 00000000         ;   BL   XDISPLAY
+  142 00000000         ;   MOV   R12,#0xf1
+  143 00000000         ;   BL   XDISPLAY
+  144 00000000         ;   ;1 pixel line gap
+  145 00000000         ;   MOV   R12,#0
+  146 00000000         ;   BL   XDISPLAY
+  147 00000000         ;   ;E
+  148 00000000         ;   MOV   R12,#0xff
+  149 00000000         ;   BL   XDISPLAY
+  150 00000000         ;   MOV   R12,#0x91
+  151 00000000         ;   BL   XDISPLAY
+  152 00000000         ;   BL   XDISPLAY
+  153 00000000         ;   BL   XDISPLAY
+  154 00000000         ;   BL   XDISPLAY
+  155 00000000         ;   ;1 pixel line gap
+  156 00000000         ;   MOV   R12,#0
+  157 00000000         ;   BL   XDISPLAY
+  158 00000000         ;   ;R
+  159 00000000         ;   MOV   R12,#0xff
+  160 00000000         ;   BL   XDISPLAY
+  161 00000000         ;   MOV   R12,#0x11
+  162 00000000         ;   BL   XDISPLAY
+  163 00000000         ;   MOV   R12,#0x31
+  164 00000000         ;   BL   XDISPLAY
+  165 00000000         ;   MOV   R12,#0x51
+  166 00000000         ;   BL   XDISPLAY
+  167 00000000         ;   MOV   R12,#0x9e
+  168 00000000         ;   BL   XDISPLAY
+  169 00000000         ;   ;1 pixel line gap
+  170 00000000         ;   MOV   R12,#0
+  171 00000000         ;   BL   XDISPLAY
+  172 00000000         ;   ;1 pixel line gap
+  173 00000000         ;   MOV   R12,#0
+  174 00000000         ;   BL   XDISPLAY
+  175 00000000         ;   ;!!
+  176 00000000         ;   MOV   R12,#0xcf
+
+
+
+ARM Macro Assembler    Page 4 
+
+
+  177 00000000         ;   BL   XDISPLAY
+  178 00000000         ;   BL   XDISPLAY
+  179 00000000         
+  180 00000000         ;;   ;;;win message
+  181 00000000         ;;   ;wow you won!!
+  182 00000000         ;   MOV   R4,#25
+  183 00000000         ;   MOV   R5,#1
+  184 00000000         ;   ;W
+  185 00000000         ;   MOV   R12,#0x03
+  186 00000000         ;   BL   XDISPLAY
+  187 00000000         ;   MOV   R12,#0x1c
+  188 00000000         ;   BL   XDISPLAY
+  189 00000000         ;   MOV   R12,#0xe0
+  190 00000000         ;   BL   XDISPLAY
+  191 00000000         ;   MOV   R12,#0x1c
+  192 00000000         ;   BL   XDISPLAY
+  193 00000000         ;   MOV   R12,#0x03
+  194 00000000         ;   BL   XDISPLAY
+  195 00000000         ;   MOV   R12,#0x03
+  196 00000000         ;   BL   XDISPLAY
+  197 00000000         ;   MOV   R12,#0x1c
+  198 00000000         ;   BL   XDISPLAY
+  199 00000000         ;   MOV   R12,#0xe0
+  200 00000000         ;   BL   XDISPLAY
+  201 00000000         ;   MOV   R12,#0x1c
+  202 00000000         ;   BL   XDISPLAY
+  203 00000000         ;   MOV   R12,#0x03
+  204 00000000         ;   BL   XDISPLAY
+  205 00000000         ;   ;1 pixel line gap
+  206 00000000         ;   MOV   R12,#0
+  207 00000000         ;   BL   XDISPLAY
+  208 00000000         ;   ; O
+  209 00000000         ;   MOV   R12,#0xff
+  210 00000000         ;   BL   XDISPLAY
+  211 00000000         ;   MOV   R12,#0x81
+  212 00000000         ;   BL   XDISPLAY
+  213 00000000         ;   BL   XDISPLAY
+  214 00000000         ;   BL   XDISPLAY
+  215 00000000         ;   BL   XDISPLAY
+  216 00000000         ;   MOV   R12,#0xff
+  217 00000000         ;   BL   XDISPLAY
+  218 00000000         ;   ;1 pixel line gap
+  219 00000000         ;   MOV   R12,#0
+  220 00000000         ;   BL   XDISPLAY
+  221 00000000         ;   ;W
+  222 00000000         ;   MOV   R12,#0x03
+  223 00000000         ;   BL   XDISPLAY
+  224 00000000         ;   MOV   R12,#0x1c
+  225 00000000         ;   BL   XDISPLAY
+  226 00000000         ;   MOV   R12,#0xe0
+  227 00000000         ;   BL   XDISPLAY
+  228 00000000         ;   MOV   R12,#0x1c
+  229 00000000         ;   BL   XDISPLAY
+  230 00000000         ;   MOV   R12,#0x03
+  231 00000000         ;   BL   XDISPLAY
+  232 00000000         ;   MOV   R12,#0x03
+  233 00000000         ;   BL   XDISPLAY
+  234 00000000         ;   MOV   R12,#0x1c
+  235 00000000         ;   BL   XDISPLAY
+
+
+
+ARM Macro Assembler    Page 5 
+
+
+  236 00000000         ;   MOV   R12,#0xe0
+  237 00000000         ;   BL   XDISPLAY
+  238 00000000         ;   MOV   R12,#0x1c
+  239 00000000         ;   BL   XDISPLAY
+  240 00000000         ;   MOV   R12,#0x03
+  241 00000000         ;   BL   XDISPLAY
+  242 00000000         ;   ;1 pixel line gap
+  243 00000000         ;   MOV   R12,#0
+  244 00000000         ;   BL   XDISPLAY
+  245 00000000         ;   ;1 pixel line gap
+  246 00000000         ;   MOV   R12,#0
+  247 00000000         ;   BL   XDISPLAY
+  248 00000000         ;   ;   ;!!
+  249 00000000         ;   MOV   R12,#0xcf
+  250 00000000         ;   BL   XDISPLAY
+  251 00000000         ;   BL   XDISPLAY
+  252 00000000         ;   ;y
+  253 00000000         ;   MOV   R4,#15
+  254 00000000         ;   MOV   R5,#3
+  255 00000000         ;   MOV   R12,#1
+  256 00000000         ;   BL   XDISPLAY
+  257 00000000         ;   MOV   R12,#2
+  258 00000000         ;   BL   XDISPLAY
+  259 00000000         ;   MOV   R12,#4
+  260 00000000         ;   BL   XDISPLAY
+  261 00000000         ;   MOV   R12,#0xf8
+  262 00000000         ;   BL   XDISPLAY
+  263 00000000         ;   MOV   R12,#4
+  264 00000000         ;   BL   XDISPLAY
+  265 00000000         ;   MOV   R12,#2
+  266 00000000         ;   BL   XDISPLAY
+  267 00000000         ;   MOV   R12,#1
+  268 00000000         ;   BL   XDISPLAY
+  269 00000000         ;   ;1 pixel line gap
+  270 00000000         ;   MOV   R12,#0
+  271 00000000         ;   BL   XDISPLAY
+  272 00000000         ;   ; O
+  273 00000000         ;   MOV   R12,#0xff
+  274 00000000         ;   BL   XDISPLAY
+  275 00000000         ;   MOV   R12,#0x81
+  276 00000000         ;   BL   XDISPLAY
+  277 00000000         ;   BL   XDISPLAY
+  278 00000000         ;   BL   XDISPLAY
+  279 00000000         ;   BL   XDISPLAY
+  280 00000000         ;   MOV   R12,#0xff
+  281 00000000         ;   BL   XDISPLAY
+  282 00000000         ;   ;1 pixel line gap
+  283 00000000         ;   MOV   R12,#0
+  284 00000000         ;   BL   XDISPLAY
+  285 00000000         ;   ;U
+  286 00000000         ;   MOV   R12,#0xff
+  287 00000000         ;   BL   XDISPLAY
+  288 00000000         ;   MOV   R12,#0x80
+  289 00000000         ;   BL   XDISPLAY
+  290 00000000         ;   BL   XDISPLAY
+  291 00000000         ;   BL   XDISPLAY
+  292 00000000         ;   BL   XDISPLAY
+  293 00000000         ;   MOV   R12,#0xff
+  294 00000000         ;   BL   XDISPLAY
+
+
+
+ARM Macro Assembler    Page 6 
+
+
+  295 00000000         ;   
+  296 00000000         ;   ;   ;1 pixel line gap
+  297 00000000         ;   MOV   R12,#0
+  298 00000000         ;   BL   XDISPLAY
+  299 00000000         ;   ;1 pixel line gap
+  300 00000000         ;   MOV   R12,#0
+  301 00000000         ;   BL   XDISPLAY
+  302 00000000         ;   ;1 pixel line gap
+  303 00000000         ;   MOV   R12,#0
+  304 00000000         ;   BL   XDISPLAY
+  305 00000000         ;   ;1 pixel line gap
+  306 00000000         ;   MOV   R12,#0
+  307 00000000         ;   BL   XDISPLAY
+  308 00000000         ;   ;W
+  309 00000000         ;   MOV   R12,#0x03
+  310 00000000         ;   BL   XDISPLAY
+  311 00000000         ;   MOV   R12,#0x1c
+  312 00000000         ;   BL   XDISPLAY
+  313 00000000         ;   MOV   R12,#0xe0
+  314 00000000         ;   BL   XDISPLAY
+  315 00000000         ;   MOV   R12,#0x1c
+  316 00000000         ;   BL   XDISPLAY
+  317 00000000         ;   MOV   R12,#0x03
+  318 00000000         ;   BL   XDISPLAY
+  319 00000000         ;   MOV   R12,#0x03
+  320 00000000         ;   BL   XDISPLAY
+  321 00000000         ;   MOV   R12,#0x1c
+  322 00000000         ;   BL   XDISPLAY
+  323 00000000         ;   MOV   R12,#0xe0
+  324 00000000         ;   BL   XDISPLAY
+  325 00000000         ;   MOV   R12,#0x1c
+  326 00000000         ;   BL   XDISPLAY
+  327 00000000         ;   MOV   R12,#0x03
+  328 00000000         ;   BL   XDISPLAY
+  329 00000000         ;   ;
+  330 00000000         ;   ;1 pixel line gap
+  331 00000000         ;   MOV   R12,#0
+  332 00000000         ;   BL   XDISPLAY
+  333 00000000         ;   ; O
+  334 00000000         ;   MOV   R12,#0xff
+  335 00000000         ;   BL   XDISPLAY
+  336 00000000         ;   MOV   R12,#0x81
+  337 00000000         ;   BL   XDISPLAY
+  338 00000000         ;   BL   XDISPLAY
+  339 00000000         ;   BL   XDISPLAY
+  340 00000000         ;   BL   XDISPLAY
+  341 00000000         ;   MOV   R12,#0xff
+  342 00000000         ;   BL   XDISPLAY
+  343 00000000         ;   ;1 pixel line gap
+  344 00000000         ;   MOV   R12,#0
+  345 00000000         ;   BL   XDISPLAY
+  346 00000000         ;   ;N
+  347 00000000         ;   MOV   R12,#0xff
+  348 00000000         ;   BL   XDISPLAY
+  349 00000000         ;   MOV   R12,#0x03
+  350 00000000         ;   BL   XDISPLAY
+  351 00000000         ;   MOV   R12,#0x0c
+  352 00000000         ;   BL   XDISPLAY
+  353 00000000         ;   MOV   R12,#0x30
+
+
+
+ARM Macro Assembler    Page 7 
+
+
+  354 00000000         ;   BL   XDISPLAY
+  355 00000000         ;   MOV   R12,#0xc0
+  356 00000000         ;   BL   XDISPLAY
+  357 00000000         ;   MOV   R12,#0xff
+  358 00000000         ;   BL   XDISPLAY
+                       
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\message.d -o.\objects\message.o -I.\RTE\_Target_1 -IC
+:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123 -IC:\Keil_v5\ARM\
+CMSIS\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 5
+26" --predefine="TM4C123GH6PM SETA 1" --list=.\listings\message.lst message.s
+333 symbols in table

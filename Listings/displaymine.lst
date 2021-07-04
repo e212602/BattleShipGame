@@ -1,0 +1,97 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;GPIO_PORTA_DATA  EQU 0x40004300
+    2 00000000         ;SSI0_DR    EQU 0x40008008
+    3 00000000         ;SSI0_SR    EQU 0x4000800C
+    4 00000000         ;ADC0PSSI   EQU 0x40038028
+    5 00000000         ;;******************************************************
+                       ******
+    6 00000000         ;Mine    EQU 0x20001895
+    7 00000000         
+    8 00000000         
+    9 00000000         ;;------------------------------------------------------
+                       ------     
+   10 00000000         ;   AREA  routines, CODE, READONLY
+   11 00000000         ;   THUMB
+   12 00000000         ;   EXTERN fifo
+   13 00000000         ;   EXPORT  DisplayMine
+   14 00000000         ;;******************************************************
+                       ******
+   15 00000000         
+   16 00000000         ;DisplayMine PROC
+   17 00000000         ; 
+   18 00000000         ;   PUSH {LR}
+   19 00000000         ;   PUSH {R6}
+   20 00000000         ;   
+   21 00000000         ;   
+   22 00000000         ;   CMP  R6,#0
+   23 00000000         ;   BEQ  done
+   24 00000000         ;   
+   25 00000000         ;   
+   26 00000000         ;   
+   27 00000000         ;loop  LDR  R1,=Mine
+   28 00000000         ;   MOV  R0,#4
+   29 00000000         ;   MUL  R0,R0,R6
+   30 00000000         ;   ADD  R1,R1,R0
+   31 00000000         ;   LDRB R4,[R1],#1
+   32 00000000         ;   LDRB R5,[R1],#1
+   33 00000000         ;   LDRB R2,[R1]
+   34 00000000         ;   
+   35 00000000         ;   LDR  R1,=GPIO_PORTA_DATA 
+   36 00000000         ;   LDR  R0,[R1]
+   37 00000000         ;   BIC  R0,#0x80
+   38 00000000         ;   STR  R0,[R1]
+   39 00000000         
+   40 00000000         ;   MOV  R0,#0x80
+   41 00000000         ;   ORR  R0,R0,R4
+   42 00000000         ;   LDR  R1,=SSI0_DR
+   43 00000000         ;   STR  R0,[R1]
+   44 00000000         ;   BL  fifo
+   45 00000000         ;   
+   46 00000000         ;   MOV  R0,#0x40
+   47 00000000         ;   ORR  R0,R5,R0
+   48 00000000         ;   LDR  R1,=SSI0_DR
+   49 00000000         ;   STR  R0,[R1]
+   50 00000000         ;   BL  fifo
+   51 00000000         ;   
+   52 00000000         ; 
+   53 00000000         ;   LDR  R1,=GPIO_PORTA_DATA 
+   54 00000000         ;   LDR  R0,[R1]
+   55 00000000         ;   EOR  R0,#0x80
+   56 00000000         ;   STR  R0,[R1]
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   57 00000000         ;   
+   58 00000000         ;   LDR  R1,=SSI0_DR
+   59 00000000         ;   STR  R2,[R1]
+   60 00000000         ;   BL  fifo
+   61 00000000         ;   
+   62 00000000         ;   SUBS R6,R6,#1
+   63 00000000         ;   BNE  loop
+   64 00000000         ;   
+   65 00000000         ;done  POP  {R6}
+   66 00000000         ;   POP  {LR}
+   67 00000000         ;   
+   68 00000000         ;   BX  LR
+   69 00000000         ;   
+   70 00000000         ;   ENDP
+   71 00000000         ;   ALIGN
+   72 00000000         ;   END
+   73 00000000         
+   74 00000000         
+                       
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\displaymine.d -o.\objects\displaymine.o -I.\RTE\_Targ
+et_1 -IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123 -IC:\Keil
+_v5\ARM\CMSIS\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSIO
+N SETA 526" --predefine="TM4C123GH6PM SETA 1" --list=.\listings\displaymine.lst
+ DisplayMine.s
+333 symbols in table

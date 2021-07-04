@@ -1,0 +1,150 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000 E000E010 
+                       NVICSTCTRL
+                               EQU              0xE000E010
+    2 00000000 E000E014 
+                       NVICSTRELOAD
+                               EQU              0xE000E014
+    3 00000000 E000E018 
+                       NVICSTCURRENT
+                               EQU              0xE000E018
+    4 00000000 E000ED20 
+                       SHPSYSPRI3
+                               EQU              0xE000ED20
+    5 00000000         
+    6 00000000         ;*******************************************************
+                       ********
+    7 00000000         ; GPIO intialization
+    8 00000000         ;*******************************************************
+                       ********
+    9 00000000         ;LABEL  DIRECTIVE VALUE   COMMENT
+   10 00000000                 AREA             routines, READONLY, CODE
+   11 00000000                 THUMB
+   12 00000000                 EXPORT           InitSysTick
+   13 00000000         
+   14 00000000         InitSysTick
+                               PROC
+   15 00000000         
+   16 00000000 B403            PUSH             {R0-R1}
+   17 00000002 480D            LDR              R0,=NVICSTCTRL ;disable SysTick
+                                                            
+   18 00000004 F04F 0100       MOV              R1,#0x0
+   19 00000008 6001            STR              R1,[R0]
+   20 0000000A         
+   21 0000000A 480C            LDR              R0,=NVICSTRELOAD ; load amount 
+                                                            of delay , (i.e loa
+                                                            d number to start c
+                                                            ounting) 
+   22 0000000C F640 1100 
+              F2C0 013D        MOV32            R1,#0x3D0900
+   23 00000014 6001            STR              R1,[R0]
+   24 00000016         
+   25 00000016 480A            LDR              R0,=NVICSTCURRENT
+   26 00000018 F640 1100 
+              F2C0 013D        MOV32            R1,#0x3D0900
+   27 00000020 6001            STR              R1,[R0]
+   28 00000022         
+   29 00000022 4808            LDR              R0,=SHPSYSPRI3 ; set priority l
+                                                            evel for SysTick , 
+                                                            in this case set to
+                                                             2
+   30 00000024 F04F 4180       MOV              R1,#0x40000000
+   31 00000028 6001            STR              R1,[R0]
+   32 0000002A         
+   33 0000002A 4803            LDR              R0,=NVICSTCTRL ; enable SysTick
+                                                             , enable interrupt
+                                                             and choose clock t
+                                                            o be 4MHz
+   34 0000002C F04F 0103       MOV              R1,#0x3
+   35 00000030 6001            STR              R1,[R0]
+   36 00000032         
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   37 00000032 BC03            POP              {R0-R1}
+   38 00000034 4770            BX               LR
+   39 00000036                 ENDP
+   40 00000036 00 00           ALIGN
+   41 00000038                 END
+              E000E010 
+              E000E014 
+              E000E018 
+              E000ED20 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\system_timer.d -o.\objects\system_timer.o -I.\RTE\_Ta
+rget_1 -IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123 -IC:\Ke
+il_v5\ARM\CMSIS\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERS
+ION SETA 526" --predefine="TM4C123GH6PM SETA 1" --list=.\listings\system_timer.
+lst system_timer.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+InitSysTick 00000000
+
+Symbol: InitSysTick
+   Definitions
+      At line 14 in file system_timer.s
+   Uses
+      At line 12 in file system_timer.s
+Comment: InitSysTick used once
+routines 00000000
+
+Symbol: routines
+   Definitions
+      At line 10 in file system_timer.s
+   Uses
+      None
+Comment: routines unused
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+NVICSTCTRL E000E010
+
+Symbol: NVICSTCTRL
+   Definitions
+      At line 1 in file system_timer.s
+   Uses
+      At line 17 in file system_timer.s
+      At line 33 in file system_timer.s
+
+NVICSTCURRENT E000E018
+
+Symbol: NVICSTCURRENT
+   Definitions
+      At line 3 in file system_timer.s
+   Uses
+      At line 25 in file system_timer.s
+Comment: NVICSTCURRENT used once
+NVICSTRELOAD E000E014
+
+Symbol: NVICSTRELOAD
+   Definitions
+      At line 2 in file system_timer.s
+   Uses
+      At line 21 in file system_timer.s
+Comment: NVICSTRELOAD used once
+SHPSYSPRI3 E000ED20
+
+Symbol: SHPSYSPRI3
+   Definitions
+      At line 4 in file system_timer.s
+   Uses
+      At line 29 in file system_timer.s
+Comment: SHPSYSPRI3 used once
+4 symbols
+342 symbols in table

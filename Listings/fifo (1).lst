@@ -1,0 +1,102 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;CHECKS FIFO EMPTY OR NOT
+    2 00000000         
+    3 00000000 400040F0 
+                       GPIO_PORTA_DATA
+                               EQU              0x400040F0
+    4 00000000 40008008 
+                       SSI0_DR EQU              0x40008008
+    5 00000000 4000800C 
+                       SSI0_SR EQU              0x4000800C
+    6 00000000         ;LABEL  DIRECTIVE VALUE  COMMENT
+    7 00000000                 AREA             routines, READONLY, CODE
+    8 00000000                 THUMB
+    9 00000000                 EXPORT           fifo
+   10 00000000         
+   11 00000000         fifo    PROC
+   12 00000000         ;check fifo if EMPTY OR NOT/ BUSY
+   13 00000000 B503            PUSH             {LR,R1,R0}
+   14 00000002 4904            LDR              R1,=SSI0_SR
+   15 00000004 6808    check   LDR              R0,[R1]
+   16 00000006 F010 0010       ANDS             R0,#0x10
+   17 0000000A D1FB            BNE              check
+   18 0000000C E8BD 4003       POP              {LR,R1,R0}
+   19 00000010 4770            BX               LR
+   20 00000012                 ENDP
+   21 00000012 00 00           ALIGN
+   22 00000014                 END
+              4000800C 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=".\objects\fifo (1).d" -o".\objects\fifo (1).o" -I.\RTE\_Target
+_1 -IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123 -IC:\Keil_v
+5\ARM\CMSIS\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION 
+SETA 526" --predefine="TM4C123GH6PM SETA 1" --list=.\listings\fifo (1).lst "fif
+o (1).s"
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+check 00000004
+
+Symbol: check
+   Definitions
+      At line 15 in file fifo
+   Uses
+      At line 17 in file fifo
+Comment: check used once
+fifo 00000000
+
+Symbol: fifo
+   Definitions
+      At line 11 in file fifo
+   Uses
+      At line 9 in file fifo
+Comment: fifo used once
+routines 00000000
+
+Symbol: routines
+   Definitions
+      At line 7 in file fifo
+   Uses
+      None
+Comment: routines unused
+3 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+GPIO_PORTA_DATA 400040F0
+
+Symbol: GPIO_PORTA_DATA
+   Definitions
+      At line 3 in file fifo
+   Uses
+      None
+Comment: GPIO_PORTA_DATA unused
+SSI0_DR 40008008
+
+Symbol: SSI0_DR
+   Definitions
+      At line 4 in file fifo
+   Uses
+      None
+Comment: SSI0_DR unused
+SSI0_SR 4000800C
+
+Symbol: SSI0_SR
+   Definitions
+      At line 5 in file fifo
+   Uses
+      At line 14 in file fifo
+Comment: SSI0_SR used once
+3 symbols
+342 symbols in table

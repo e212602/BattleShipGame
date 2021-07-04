@@ -1,0 +1,774 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;GPIO Registers
+    2 00000000 40025044 
+                       GPIO_PORTF_DATA
+                               EQU              0x40025044  ; Access BIT0,4
+    3 00000000 400FE608 
+                       SYSCTL_RCGCGIOP
+                               EQU              0x400FE608  ; clock port enable
+                                                             reg.
+    4 00000000 40025400 
+                       GPIO_PORTF_DIR
+                               EQU              0x40025400  ; direction reg.
+    5 00000000 40025420 
+                       GPIO_PORTF_AFSEL
+                               EQU              0x40025420  ; alternate..... re
+                                                            g.
+    6 00000000 40025510 
+                       GPIO_PORTF_PUR
+                               EQU              0x40025510  ; pull up reg
+    7 00000000 4002551C 
+                       GPIO_PORTF_DEN
+                               EQU              0x4002551C  ; digital enable re
+                                                            g.
+    8 00000000 40025514 
+                       GPIO_PORTF_PDR
+                               EQU              0x40025514  ; pull down registe
+                                                            r 
+    9 00000000 40025404 
+                       GPIO_PORTF_IS
+                               EQU              0x40025404  ; sense interrupt r
+                                                            egister
+   10 00000000 40025408 
+                       GPIO_PORTF_IBE
+                               EQU              0x40025408  ; interrupt both ed
+                                                            ges register
+   11 00000000 4002540C 
+                       GPIO_PORTF_IEV
+                               EQU              0x4002540C  ; interrupt event r
+                                                            egister
+   12 00000000 40025410 
+                       GPIO_PORTF_IM
+                               EQU              0x40025410  ; interrupt mask
+   13 00000000 40025414 
+                       GPIO_PORTF_RIS
+                               EQU              0x40025414  ; row interrupt reg
+                                                            ister
+   14 00000000 4002541C 
+                       GPIO_PORTF_ICR
+                               EQU              0x4002541C  ; clear interrupt r
+                                                            egister
+   15 00000000         
+   16 00000000         
+   17 00000000         ;NVIC ENABLE
+   18 00000000 E000E41C 
+                       NVIC_PRI
+                               EQU              0xE000E41C  ; priority register
+                                                            
+   19 00000000 E000E100 
+                       NVIC_EN EQU              0xE000E100  ; enable register
+   20 00000000         
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   21 00000000         
+   22 00000000         ;LOCK REGISTER
+   23 00000000 40025520 
+                       GPIO_PORTF_GPIOLOCK
+                               EQU              0x40025520  ;GPIO LOCK
+   24 00000000 40025524 
+                       GPIO_PORTF_CR
+                               EQU              0x40025524  ;GPIO COMMIT
+   25 00000000         
+   26 00000000         
+   27 00000000 20001890 
+                       tempX   EQU              0x20001890
+   28 00000000 20001891 
+                       tempY   EQU              0x20001891
+   29 00000000 20001992 
+                       tempD   EQU              0x20001992
+   30 00000000         
+   31 00000000 2000187D 
+                       start   EQU              0x2000187d
+   32 00000000         
+   33 00000000 200018C0 
+                       Funct   EQU              0x200018C0
+   34 00000000         
+   35 00000000         
+   36 00000000 20001895 
+                       Mine    EQU              0x20001895
+   37 00000000         
+   38 00000000         ;*******************************************************
+                       **
+   39 00000000                 AREA             routines, CODE, READONLY
+   40 00000000                 THUMB
+   41 00000000                 EXTERN           DELAY100
+   42 00000000                 EXTERN           ships
+   43 00000000         ;   EXTERN  DisplayMine
+   44 00000000                 EXPORT           ButtonsInit
+   45 00000000                 EXPORT           ButtonsHand
+   46 00000000         
+   47 00000000         ;*******************************************************
+                       **
+   48 00000000         
+   49 00000000         
+   50 00000000         
+   51 00000000         ButtonsHand
+                               PROC
+   52 00000000 B500            PUSH             {LR}
+   53 00000002         
+   54 00000002 F7FF FFFE       BL               DELAY100
+   55 00000006 F7FF FFFE       BL               DELAY100
+   56 0000000A F7FF FFFE       BL               DELAY100
+   57 0000000E F7FF FFFE       BL               DELAY100
+   58 00000012 F7FF FFFE       BL               DELAY100
+   59 00000016         
+   60 00000016 4960            LDR              R1,=Funct
+   61 00000018 7808            LDRB             R0,[R1]
+   62 0000001A 2801            CMP              R0,#1
+   63 0000001C D053            BEQ              funtion2
+   64 0000001E         
+   65 0000001E         
+   66 0000001E         
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+   67 0000001E         
+   68 0000001E 495F            LDR              R1,=GPIO_PORTF_RIS
+   69 00000020 6808            LDR              R0,[R1]
+   70 00000022 F010 0001       ANDS             R0,#0x01
+   71 00000026 D02A            BEQ              battleship
+   72 00000028         
+   73 00000028         ;CiviliianShip
+   74 00000028         
+   75 00000028 495D            LDR              R1,=tempX
+   76 0000002A F811 4B01       LDRB             R4,[R1],#1  ; load x
+   77 0000002E F811 5B01       LDRB             R5,[R1],#1  ; load y
+   78 00000032 780A            LDRB             R2,[R1]
+   79 00000034         
+   80 00000034 F04F 0900       MOV              R9,#0
+   81 00000038 EA4F 0252 
+                       shift   LSR              R2,#1
+   82 0000003C 2A00            CMP              R2,#0
+   83 0000003E D002            BEQ              here1
+   84 00000040 F109 0901       ADD              R9,#1
+   85 00000044 E7F8            B                shift
+   86 00000046 464A    here1   MOV              R2,R9
+   87 00000048         
+   88 00000048         
+   89 00000048         
+   90 00000048 4956            LDR              R1,=start
+   91 0000004A F04F 0004       MOV              R0,#4
+   92 0000004E FB00 F006       MUL              R0,R0,R6
+   93 00000052 4401            ADD              R1,R1,R0
+   94 00000054 F04F 0001       MOV              R0,#1
+   95 00000058 F801 0B01       STRB             R0,[R1],#1
+   96 0000005C F801 4B01       STRB             R4,[R1],#1
+   97 00000060 F801 5B01       STRB             R5,[R1],#1
+   98 00000064 700A            STRB             R2,[R1]
+   99 00000066         
+  100 00000066         
+  101 00000066 F106 0601       ADD              R6,R6,#0x01
+  102 0000006A F7FF FFFE       BL               ships
+  103 0000006E         
+  104 0000006E         
+  105 0000006E 494E    done    LDR              R1,=GPIO_PORTF_ICR
+  106 00000070 6808            LDR              R0,[R1]
+  107 00000072 F040 0011       ORR              R0,#0x11
+  108 00000076 6008            STR              R0,[R1]
+  109 00000078         
+  110 00000078 F85D EB04       POP              {LR}
+  111 0000007C 4770            BX               LR
+  112 0000007E         
+  113 0000007E         
+  114 0000007E         
+  115 0000007E         ; battle ship
+  116 0000007E         
+  117 0000007E 4948    battleship
+                               LDR              R1,=tempX
+  118 00000080 F811 4B01       LDRB             R4,[R1],#1  ; load x
+  119 00000084 F811 5B01       LDRB             R5,[R1],#1  ; load y
+  120 00000088 780A            LDRB             R2,[R1]
+  121 0000008A         
+  122 0000008A         
+  123 0000008A F04F 0900       MOV              R9,#0
+
+
+
+ARM Macro Assembler    Page 4 
+
+
+  124 0000008E EA4F 0252 
+                       shift2  LSR              R2,#1
+  125 00000092 2A00            CMP              R2,#0
+  126 00000094 D002            BEQ              here12
+  127 00000096 F109 0901       ADD              R9,#1
+  128 0000009A E7F8            B                shift2
+  129 0000009C 464A    here12  MOV              R2,R9
+  130 0000009E         
+  131 0000009E 4941            LDR              R1,=start
+  132 000000A0 F04F 0004       MOV              R0,#4
+  133 000000A4 FB00 F006       MUL              R0,R0,R6
+  134 000000A8 4401            ADD              R1,R1,R0
+  135 000000AA F04F 0002       MOV              R0,#2
+  136 000000AE F801 0B01       STRB             R0,[R1],#1
+  137 000000B2 F801 4B01       STRB             R4,[R1],#1
+  138 000000B6 F801 5B01       STRB             R5,[R1],#1
+  139 000000BA 700A            STRB             R2,[R1]
+  140 000000BC         
+  141 000000BC F106 0601       ADD              R6,R6,#0x01
+  142 000000C0 F7FF FFFE       BL               ships
+  143 000000C4         
+  144 000000C4 E7D3            B                done
+  145 000000C6         
+  146 000000C6         
+  147 000000C6         
+  148 000000C6 4935    funtion2
+                               LDR              R1,=GPIO_PORTF_RIS
+  149 000000C8 6808            LDR              R0,[R1]
+  150 000000CA F010 0010       ANDS             R0,#0x10
+  151 000000CE D01D            BEQ              player2done
+  152 000000D0         
+  153 000000D0         
+  154 000000D0         
+  155 000000D0 4933            LDR              R1,=tempX
+  156 000000D2 F811 4B01       LDRB             R4,[R1],#1  ; load x
+  157 000000D6 F811 5B01       LDRB             R5,[R1],#1  ; load y
+  158 000000DA 780A            LDRB             R2,[R1]
+  159 000000DC         
+  160 000000DC F04F 0900       MOV              R9,#0
+  161 000000E0 EA4F 0252 
+                       shift1  LSR              R2,#1
+  162 000000E4 2A00            CMP              R2,#0
+  163 000000E6 D002            BEQ              here11
+  164 000000E8 F109 0901       ADD              R9,#1
+  165 000000EC E7F8            B                shift1
+  166 000000EE 464A    here11  MOV              R2,R9
+  167 000000F0         
+  168 000000F0         
+  169 000000F0 492E            LDR              R1,=Mine
+  170 000000F2 F04F 0004       MOV              R0,#4
+  171 000000F6 FB00 F006       MUL              R0,R0,R6
+  172 000000FA 4401            ADD              R1,R1,R0
+  173 000000FC F801 4B01       STRB             R4,[R1],#1  ;x
+  174 00000100 F801 5B01       STRB             R5,[R1],#1  ;y
+  175 00000104 700A            STRB             R2,[R1]     ;d
+  176 00000106         
+  177 00000106         
+  178 00000106 F106 0601       ADD              R6,R6,#0x01
+  179 0000010A         ;    BL  DisplayMine
+
+
+
+ARM Macro Assembler    Page 5 
+
+
+  180 0000010A         
+  181 0000010A E7B0            B                done
+  182 0000010C         
+  183 0000010C E7AF    player2done
+                               B                done
+  184 0000010E         
+  185 0000010E         
+  186 0000010E         
+  187 0000010E         
+  188 0000010E                 ENDP
+  189 0000010E         
+  190 0000010E         
+  191 0000010E         ;*******************************************************
+                       ************
+  192 0000010E         
+  193 0000010E         
+  194 0000010E         ButtonsInit
+                               PROC
+  195 0000010E         
+  196 0000010E 4928            LDR              R1,=SYSCTL_RCGCGIOP
+  197 00000110 6808            LDR              R0,[R1]
+  198 00000112 F040 0020       ORR              R0,R0,#0x20 ; ACTIVATE PORT F C
+                                                            LOCK
+  199 00000116 6008            STR              R0,[R1]
+  200 00000118 BF00            NOP
+  201 0000011A BF00            NOP
+  202 0000011C BF00            NOP
+  203 0000011E         
+  204 0000011E         
+  205 0000011E         
+  206 0000011E 4925            LDR              R1,=GPIO_PORTF_GPIOLOCK
+  207 00000120 F244 304B 
+              F6C4 404F        MOV32            R0,#0x4C4F434B ; UNLOCK PF0
+  208 00000128 6008            STR              R0,[R1]
+  209 0000012A         
+  210 0000012A         
+  211 0000012A 4923            LDR              R1,=GPIO_PORTF_CR
+  212 0000012C F04F 0011       MOV              R0,#0x11    ; SET PF0 AND PF4 T
+                                                            O COMMIT
+  213 00000130 6008            STR              R0,[R1]
+  214 00000132         
+  215 00000132         
+  216 00000132         
+  217 00000132 4922            LDR              R1,=GPIO_PORTF_DIR
+  218 00000134 6808            LDR              R0,[R1]
+  219 00000136 F020 0011       BIC              R0,#0x11    ; SET PF0 AND PF4 A
+                                                            S INPUT
+  220 0000013A 6008            STR              R0,[R1]
+  221 0000013C         
+  222 0000013C 4920            LDR              R1,=GPIO_PORTF_DEN
+  223 0000013E 6808            LDR              R0,[R1]
+  224 00000140 F040 0011       ORR              R0,#0x11    ; SET PF0 and PF4 A
+                                                            S DIGITAL PINS
+  225 00000144 6008            STR              R0,[R1]
+  226 00000146         
+  227 00000146 491F            LDR              R1,=GPIO_PORTF_AFSEL
+  228 00000148 6808            LDR              R0,[R1]
+  229 0000014A F020 0011       BIC              R0,#0x11    ; DIAABLE ALTERNATE
+                                                             FUNCTION
+
+
+
+ARM Macro Assembler    Page 6 
+
+
+  230 0000014E 6008            STR              R0,[R1]
+  231 00000150         
+  232 00000150 491D            LDR              R1,=GPIO_PORTF_PUR
+  233 00000152 6808            LDR              R0,[R1]
+  234 00000154 F040 0011       ORR              R0,#0x11    ; PULL UP PF0 AND P
+                                                            F4
+  235 00000158 6008            STR              R0,[R1]
+  236 0000015A         
+  237 0000015A 491C            LDR              R1,=GPIO_PORTF_IS
+  238 0000015C 6808            LDR              R0,[R1]
+  239 0000015E F020 0011       BIC              R0,#0x11    ; SET PF0 AND PF4 A
+                                                            S EDGE SENSETIVE
+  240 00000162 6008            STR              R0,[R1]
+  241 00000164         
+  242 00000164 491A            LDR              R1,=GPIO_PORTF_IBE
+  243 00000166 6808            LDR              R0,[R1]
+  244 00000168 F020 0011       BIC              R0,#0x11    ; SET PF0 AND PF4 A
+                                                            S EDGE SENSETIVE
+  245 0000016C 6008            STR              R0,[R1]
+  246 0000016E         
+  247 0000016E 4919            LDR              R1,=GPIO_PORTF_IEV
+  248 00000170 6808            LDR              R0,[R1]
+  249 00000172 F040 0011       ORR              R0,#0x11    ; RISING EDGE SENSE
+                                                            TIVITY
+  250 00000176 6008            STR              R0,[R1]
+  251 00000178         
+  252 00000178 4917            LDR              R1,=NVIC_PRI
+  253 0000017A 6808            LDR              R0,[R1]
+  254 0000017C F440 0080       ORR              R0,#0x00400000 ; INTERRUPT PRIO
+                                                            RITY 2
+  255 00000180 6008            STR              R0,[R1]
+  256 00000182         
+  257 00000182 4916            LDR              R1,=NVIC_EN
+  258 00000184 6808            LDR              R0,[R1]
+  259 00000186 F040 4080       ORR              R0,#0x40000000 ; ENABLE PORT F 
+                                                            INTERRUPT
+  260 0000018A 6008            STR              R0,[R1]
+  261 0000018C         
+  262 0000018C 4914            LDR              R1,=GPIO_PORTF_IM
+  263 0000018E 6808            LDR              R0,[R1]
+  264 00000190 F040 0011       ORR              R0,#0x11    ; ENABLE INTERRUPT 
+                                                            PF0 AND PF4
+  265 00000194 6008            STR              R0,[R1]
+  266 00000196         
+  267 00000196 4770            BX               LR
+  268 00000198         
+  269 00000198         
+  270 00000198                 ENDP
+  271 00000198         
+  272 00000198         
+  273 00000198                 ALIGN
+  274 00000198                 END
+              200018C0 
+              40025414 
+              20001890 
+              2000187D 
+              4002541C 
+              20001895 
+              400FE608 
+
+
+
+ARM Macro Assembler    Page 7 
+
+
+              40025520 
+              40025524 
+              40025400 
+              4002551C 
+              40025420 
+              40025510 
+              40025404 
+              40025408 
+              4002540C 
+              E000E41C 
+              E000E100 
+              40025410 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\buttons.d -o.\objects\buttons.o -I.\RTE\_Target_1 -IC
+:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123 -IC:\Keil_v5\ARM\
+CMSIS\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 5
+26" --predefine="TM4C123GH6PM SETA 1" --list=.\listings\buttons.lst Buttons.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+ButtonsHand 00000000
+
+Symbol: ButtonsHand
+   Definitions
+      At line 51 in file Buttons.s
+   Uses
+      At line 45 in file Buttons.s
+Comment: ButtonsHand used once
+ButtonsInit 0000010E
+
+Symbol: ButtonsInit
+   Definitions
+      At line 194 in file Buttons.s
+   Uses
+      At line 44 in file Buttons.s
+Comment: ButtonsInit used once
+battleship 0000007E
+
+Symbol: battleship
+   Definitions
+      At line 117 in file Buttons.s
+   Uses
+      At line 71 in file Buttons.s
+Comment: battleship used once
+done 0000006E
+
+Symbol: done
+   Definitions
+      At line 105 in file Buttons.s
+   Uses
+      At line 144 in file Buttons.s
+      At line 181 in file Buttons.s
+      At line 183 in file Buttons.s
+
+funtion2 000000C6
+
+Symbol: funtion2
+   Definitions
+      At line 148 in file Buttons.s
+   Uses
+      At line 63 in file Buttons.s
+Comment: funtion2 used once
+here1 00000046
+
+Symbol: here1
+   Definitions
+      At line 86 in file Buttons.s
+   Uses
+      At line 83 in file Buttons.s
+Comment: here1 used once
+here11 000000EE
+
+Symbol: here11
+   Definitions
+      At line 166 in file Buttons.s
+   Uses
+      At line 163 in file Buttons.s
+Comment: here11 used once
+here12 0000009C
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
+
+Symbol: here12
+   Definitions
+      At line 129 in file Buttons.s
+   Uses
+      At line 126 in file Buttons.s
+Comment: here12 used once
+player2done 0000010C
+
+Symbol: player2done
+   Definitions
+      At line 183 in file Buttons.s
+   Uses
+      At line 151 in file Buttons.s
+Comment: player2done used once
+routines 00000000
+
+Symbol: routines
+   Definitions
+      At line 39 in file Buttons.s
+   Uses
+      None
+Comment: routines unused
+shift 00000038
+
+Symbol: shift
+   Definitions
+      At line 81 in file Buttons.s
+   Uses
+      At line 85 in file Buttons.s
+Comment: shift used once
+shift1 000000E0
+
+Symbol: shift1
+   Definitions
+      At line 161 in file Buttons.s
+   Uses
+      At line 165 in file Buttons.s
+Comment: shift1 used once
+shift2 0000008E
+
+Symbol: shift2
+   Definitions
+      At line 124 in file Buttons.s
+   Uses
+      At line 128 in file Buttons.s
+Comment: shift2 used once
+13 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+Funct 200018C0
+
+Symbol: Funct
+   Definitions
+      At line 33 in file Buttons.s
+   Uses
+      At line 60 in file Buttons.s
+Comment: Funct used once
+GPIO_PORTF_AFSEL 40025420
+
+Symbol: GPIO_PORTF_AFSEL
+   Definitions
+      At line 5 in file Buttons.s
+   Uses
+      At line 227 in file Buttons.s
+Comment: GPIO_PORTF_AFSEL used once
+GPIO_PORTF_CR 40025524
+
+Symbol: GPIO_PORTF_CR
+   Definitions
+      At line 24 in file Buttons.s
+   Uses
+      At line 211 in file Buttons.s
+Comment: GPIO_PORTF_CR used once
+GPIO_PORTF_DATA 40025044
+
+Symbol: GPIO_PORTF_DATA
+   Definitions
+      At line 2 in file Buttons.s
+   Uses
+      None
+Comment: GPIO_PORTF_DATA unused
+GPIO_PORTF_DEN 4002551C
+
+Symbol: GPIO_PORTF_DEN
+   Definitions
+      At line 7 in file Buttons.s
+   Uses
+      At line 222 in file Buttons.s
+Comment: GPIO_PORTF_DEN used once
+GPIO_PORTF_DIR 40025400
+
+Symbol: GPIO_PORTF_DIR
+   Definitions
+      At line 4 in file Buttons.s
+   Uses
+      At line 217 in file Buttons.s
+Comment: GPIO_PORTF_DIR used once
+GPIO_PORTF_GPIOLOCK 40025520
+
+Symbol: GPIO_PORTF_GPIOLOCK
+   Definitions
+      At line 23 in file Buttons.s
+   Uses
+      At line 206 in file Buttons.s
+Comment: GPIO_PORTF_GPIOLOCK used once
+GPIO_PORTF_IBE 40025408
+
+Symbol: GPIO_PORTF_IBE
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Absolute symbols
+
+   Definitions
+      At line 10 in file Buttons.s
+   Uses
+      At line 242 in file Buttons.s
+Comment: GPIO_PORTF_IBE used once
+GPIO_PORTF_ICR 4002541C
+
+Symbol: GPIO_PORTF_ICR
+   Definitions
+      At line 14 in file Buttons.s
+   Uses
+      At line 105 in file Buttons.s
+Comment: GPIO_PORTF_ICR used once
+GPIO_PORTF_IEV 4002540C
+
+Symbol: GPIO_PORTF_IEV
+   Definitions
+      At line 11 in file Buttons.s
+   Uses
+      At line 247 in file Buttons.s
+Comment: GPIO_PORTF_IEV used once
+GPIO_PORTF_IM 40025410
+
+Symbol: GPIO_PORTF_IM
+   Definitions
+      At line 12 in file Buttons.s
+   Uses
+      At line 262 in file Buttons.s
+Comment: GPIO_PORTF_IM used once
+GPIO_PORTF_IS 40025404
+
+Symbol: GPIO_PORTF_IS
+   Definitions
+      At line 9 in file Buttons.s
+   Uses
+      At line 237 in file Buttons.s
+Comment: GPIO_PORTF_IS used once
+GPIO_PORTF_PDR 40025514
+
+Symbol: GPIO_PORTF_PDR
+   Definitions
+      At line 8 in file Buttons.s
+   Uses
+      None
+Comment: GPIO_PORTF_PDR unused
+GPIO_PORTF_PUR 40025510
+
+Symbol: GPIO_PORTF_PUR
+   Definitions
+      At line 6 in file Buttons.s
+   Uses
+      At line 232 in file Buttons.s
+Comment: GPIO_PORTF_PUR used once
+GPIO_PORTF_RIS 40025414
+
+Symbol: GPIO_PORTF_RIS
+   Definitions
+      At line 13 in file Buttons.s
+   Uses
+
+
+
+ARM Macro Assembler    Page 3 Alphabetic symbol ordering
+Absolute symbols
+
+      At line 68 in file Buttons.s
+      At line 148 in file Buttons.s
+
+Mine 20001895
+
+Symbol: Mine
+   Definitions
+      At line 36 in file Buttons.s
+   Uses
+      At line 169 in file Buttons.s
+Comment: Mine used once
+NVIC_EN E000E100
+
+Symbol: NVIC_EN
+   Definitions
+      At line 19 in file Buttons.s
+   Uses
+      At line 257 in file Buttons.s
+Comment: NVIC_EN used once
+NVIC_PRI E000E41C
+
+Symbol: NVIC_PRI
+   Definitions
+      At line 18 in file Buttons.s
+   Uses
+      At line 252 in file Buttons.s
+Comment: NVIC_PRI used once
+SYSCTL_RCGCGIOP 400FE608
+
+Symbol: SYSCTL_RCGCGIOP
+   Definitions
+      At line 3 in file Buttons.s
+   Uses
+      At line 196 in file Buttons.s
+Comment: SYSCTL_RCGCGIOP used once
+start 2000187D
+
+Symbol: start
+   Definitions
+      At line 31 in file Buttons.s
+   Uses
+      At line 90 in file Buttons.s
+      At line 131 in file Buttons.s
+
+tempD 20001992
+
+Symbol: tempD
+   Definitions
+      At line 29 in file Buttons.s
+   Uses
+      None
+Comment: tempD unused
+tempX 20001890
+
+Symbol: tempX
+   Definitions
+      At line 27 in file Buttons.s
+   Uses
+      At line 75 in file Buttons.s
+
+
+
+ARM Macro Assembler    Page 4 Alphabetic symbol ordering
+Absolute symbols
+
+      At line 117 in file Buttons.s
+      At line 155 in file Buttons.s
+
+tempY 20001891
+
+Symbol: tempY
+   Definitions
+      At line 28 in file Buttons.s
+   Uses
+      None
+Comment: tempY unused
+23 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+DELAY100 00000000
+
+Symbol: DELAY100
+   Definitions
+      At line 41 in file Buttons.s
+   Uses
+      At line 54 in file Buttons.s
+      At line 55 in file Buttons.s
+      At line 56 in file Buttons.s
+      At line 57 in file Buttons.s
+      At line 58 in file Buttons.s
+
+ships 00000000
+
+Symbol: ships
+   Definitions
+      At line 42 in file Buttons.s
+   Uses
+      At line 102 in file Buttons.s
+      At line 142 in file Buttons.s
+
+2 symbols
+374 symbols in table

@@ -1,0 +1,126 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;LABEL  DIRECTIVE VALUE  COMMENT
+    2 00000000                 AREA             routines, READONLY, CODE
+    3 00000000                 THUMB
+    4 00000000                 EXPORT           CONVRT
+    5 00000000         
+    6 00000000         
+    7 00000000         CONVRT  PROC
+    8 00000000 B43F            PUSH             {R0-R5}
+    9 00000002 F64C 2000 
+              F6C3 309A        MOV32            R0,#0x3B9ACA00 
+                                                            ; move 10^9 to R0
+   10 0000000A F04F 010A       MOV              R1,#10
+   11 0000000E F04F 030A       MOV              R3,#10
+   12 00000012         
+   13 00000012 FBB4 F2F0 
+                       start   UDIV             R2,R4,R0
+   14 00000016 2A00            CMP              R2,#0x0
+   15 00000018 D012            BEQ              dec
+   16 0000001A         
+   17 0000001A F102 0230 
+                       loop    ADD              R2,R2,#0x30
+   18 0000001E 702A            STRB             R2,[R5]
+   19 00000020 F105 0501       ADD              R5,R5,#1
+   20 00000024 F1A2 0230       SUB              R2,R2,#0x30
+   21 00000028 FB02 F200       MUL              R2,R2,R0
+   22 0000002C EBA4 0402       SUB              R4,R4,R2
+   23 00000030 FBB0 F0F3       UDIV             R0,R0,R3
+   24 00000034 1E49            SUBS             R1,R1,#1
+   25 00000036 D100            BNE              div
+   26 00000038 E00B            B                Done
+   27 0000003A         
+   28 0000003A FBB4 F2F0 
+                       div     UDIV             R2,R4,R0
+   29 0000003E E7EC            B                loop
+   30 00000040         
+   31 00000040 FBB0 F0F3 
+                       dec     UDIV             R0,R0,R3
+   32 00000044 1E49            SUBS             R1,R1,#1
+   33 00000046 D1E4            BNE              start
+   34 00000048 F102 0230       ADD              R2,R2,#0x30
+   35 0000004C 702A            STRB             R2,[R5]
+   36 0000004E F105 0501       ADD              R5,R5,#1
+   37 00000052         
+   38 00000052 F04F 0304 
+                       Done    MOV              R3,#0x04
+   39 00000056 702B            STRB             R3,[R5]
+   40 00000058 BC3F            POP              {R0-R5}
+   41 0000005A 4770            BX               LR
+   42 0000005C                 ALIGN
+   43 0000005C                 ENDP
+   44 0000005C                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\convrt.d -o.\objects\convrt.o -I.\RTE\_Target_1 -IC:\
+Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123 -IC:\Keil_v5\ARM\CM
+SIS\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 526
+" --predefine="TM4C123GH6PM SETA 1" --list=.\listings\convrt.lst CONVRT.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+CONVRT 00000000
+
+Symbol: CONVRT
+   Definitions
+      At line 7 in file CONVRT.s
+   Uses
+      At line 4 in file CONVRT.s
+Comment: CONVRT used once
+Done 00000052
+
+Symbol: Done
+   Definitions
+      At line 38 in file CONVRT.s
+   Uses
+      At line 26 in file CONVRT.s
+Comment: Done used once
+dec 00000040
+
+Symbol: dec
+   Definitions
+      At line 31 in file CONVRT.s
+   Uses
+      At line 15 in file CONVRT.s
+Comment: dec used once
+div 0000003A
+
+Symbol: div
+   Definitions
+      At line 28 in file CONVRT.s
+   Uses
+      At line 25 in file CONVRT.s
+Comment: div used once
+loop 0000001A
+
+Symbol: loop
+   Definitions
+      At line 17 in file CONVRT.s
+   Uses
+      At line 29 in file CONVRT.s
+Comment: loop used once
+routines 00000000
+
+Symbol: routines
+   Definitions
+      At line 2 in file CONVRT.s
+   Uses
+      None
+Comment: routines unused
+start 00000012
+
+Symbol: start
+   Definitions
+      At line 13 in file CONVRT.s
+   Uses
+      At line 33 in file CONVRT.s
+Comment: start used once
+7 symbols
+341 symbols in table

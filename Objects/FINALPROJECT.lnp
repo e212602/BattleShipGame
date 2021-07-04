@@ -1,0 +1,24 @@
+--cpu=Cortex-M4.fp
+".\objects\delay100.o"
+".\objects\mainprogram.o"
+".\objects\startup.o"
+".\objects\initializationofssi.o"
+".\objects\border.o"
+".\objects\printnumber.o"
+".\objects\adcinit.o"
+".\objects\calibrator.o"
+".\objects\buttons.o"
+".\objects\display_new.o"
+".\objects\icon.o"
+".\objects\clearprev.o"
+".\objects\player2.o"
+".\objects\system_timer.o"
+".\objects\fifo.o"
+".\objects\ships_display.o"
+".\objects\pulse.o"
+".\objects\decision_maker.o"
+".\objects\mine_viccinity-check.o"
+".\objects\x_display.o"
+--ro-base 0x00000000 --entry 0x00000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\FINALPROJECT.map" -o .\Objects\FINALPROJECT.axf

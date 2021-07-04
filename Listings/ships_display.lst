@@ -1,0 +1,166 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;makes ship on the stored location in memory according t
+                       o type
+    2 00000000         ;memory stores 4 locations, order.. flag(battle/civilian
+                        ahip),X coordinate, y coordinate, position in y .. 4 of
+                        these
+    3 00000000 2000187D 
+                       start   EQU              0x2000187d
+    4 00000000         ;LABEL  DIRECTIVE VALUE  COMMENT
+    5 00000000                 AREA             routines, READONLY, CODE
+    6 00000000                 THUMB
+    7 00000000                 EXTERN           ship_civil
+    8 00000000                 EXTERN           ship_battle
+    9 00000000                 EXPORT           ships
+   10 00000000         
+   11 00000000         ships   PROC
+   12 00000000 B5FF            PUSH             {R0-R7,LR}
+   13 00000002 2E00            CMP              R6,#0       ; counter r6 for fo
+                                                            ur ships only, 0 im
+                                                            plies no ship is pl
+                                                            aced
+   14 00000004 D014            BEQ              done
+   15 00000006 480C            LDR              R0,=start   ;initial address of
+                                                             memory.. 
+   16 00000008 7807    again   LDRB             R7,[R0]     ;FLAG
+   17 0000000A F810 1F01       LDRB             R1,[R0,#1]! ; x coordinate
+   18 0000000E F810 3F01       LDRB             R3,[R0,#1]! ; y coordinate (sec
+                                                            tion)
+   19 00000012 F810 2F01       LDRB             R2,[R0,#1]! ; y coordinate (wit
+                                                            hin section) 
+   20 00000016 460C            MOV              R4,R1
+   21 00000018 461D            MOV              R5,R3
+   22 0000001A         ;r2 already has position within the section
+   23 0000001A 2F01            CMP              R7,#1       ; 1 imples civilian
+                                                             ship, 2 implies ba
+                                                            ttle ship
+   24 0000001C D102            BNE              here
+   25 0000001E F7FF FFFE       BL               ship_civil
+   26 00000022 E001            B                ok
+   27 00000024 F7FF FFFE 
+                       here    BL               ship_battle
+   28 00000028         
+   29 00000028 F100 0001 
+                       ok      ADD              R0,#1       ;for next ship
+   30 0000002C 3E01            SUBS             R6,#1
+   31 0000002E D1EB            BNE              again
+   32 00000030         
+   33 00000030         
+   34 00000030 E8BD 40FF 
+                       done    POP              {R0-R7,LR}
+   35 00000034 4770            BX               LR
+   36 00000036                 ENDP
+   37 00000036 00 00           ALIGN
+   38 00000038                 END
+              2000187D 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\ships_display.d -o.\objects\ships_display.o -I.\RTE\_
+Target_1 -IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123 -IC:\
+Keil_v5\ARM\CMSIS\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VE
+RSION SETA 526" --predefine="TM4C123GH6PM SETA 1" --list=.\listings\ships_displ
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+ay.lst ships_display.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+again 00000008
+
+Symbol: again
+   Definitions
+      At line 16 in file ships_display.s
+   Uses
+      At line 31 in file ships_display.s
+Comment: again used once
+done 00000030
+
+Symbol: done
+   Definitions
+      At line 34 in file ships_display.s
+   Uses
+      At line 14 in file ships_display.s
+Comment: done used once
+here 00000024
+
+Symbol: here
+   Definitions
+      At line 27 in file ships_display.s
+   Uses
+      At line 24 in file ships_display.s
+Comment: here used once
+ok 00000028
+
+Symbol: ok
+   Definitions
+      At line 29 in file ships_display.s
+   Uses
+      At line 26 in file ships_display.s
+Comment: ok used once
+routines 00000000
+
+Symbol: routines
+   Definitions
+      At line 5 in file ships_display.s
+   Uses
+      None
+Comment: routines unused
+ships 00000000
+
+Symbol: ships
+   Definitions
+      At line 11 in file ships_display.s
+   Uses
+      At line 9 in file ships_display.s
+Comment: ships used once
+6 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+start 2000187D
+
+Symbol: start
+   Definitions
+      At line 3 in file ships_display.s
+   Uses
+      At line 15 in file ships_display.s
+Comment: start used once
+1 symbol
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+ship_battle 00000000
+
+Symbol: ship_battle
+   Definitions
+      At line 8 in file ships_display.s
+   Uses
+      At line 27 in file ships_display.s
+Comment: ship_battle used once
+ship_civil 00000000
+
+Symbol: ship_civil
+   Definitions
+      At line 7 in file ships_display.s
+   Uses
+      At line 25 in file ships_display.s
+Comment: ship_civil used once
+2 symbols
+345 symbols in table

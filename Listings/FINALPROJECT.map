@@ -1,0 +1,407 @@
+Component: ARM Compiler 5.06 update 6 (build 750) Tool: armlink [4d35ed]
+
+==============================================================================
+
+Section Cross References
+
+    mainprogram.o(main) refers to initializationofssi.o(routines) for ssi_init
+    mainprogram.o(main) refers to delay100.o(routines) for DELAY100
+    mainprogram.o(main) refers to adcinit.o(routines) for ADC0Init
+    mainprogram.o(main) refers to buttons.o(routines) for ButtonsInit
+    mainprogram.o(main) refers to calibrator.o(routines) for Calibrator
+    mainprogram.o(main) refers to ships_display.o(routines) for ships
+    mainprogram.o(main) refers to clearprev.o(routines) for ClearScreen
+    mainprogram.o(main) refers to pulse.o(routines) for PULSE_INIT
+    mainprogram.o(main) refers to system_timer.o(routines) for InitSysTick
+    mainprogram.o(main) refers to player2.o(routines) for player2
+    mainprogram.o(main) refers to decision_maker.o(routines) for DECISION
+    startup.o(STACK) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup.o(RESET) refers to startup.o(STACK) for StackMem
+    startup.o(RESET) refers to mainprogram.o(main) for __main
+    startup.o(RESET) refers to printnumber.o(routines) for PrintNum
+    startup.o(RESET) refers to buttons.o(routines) for ButtonsHand
+    startup.o(.text) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup.o(.text) refers to startup.o(HEAP) for HeapMem
+    startup.o(.text) refers to startup.o(STACK) for StackMem
+    printnumber.o(routines) refers to printnumber.o(sdata) for Zero
+    buttons.o(routines) refers to delay100.o(routines) for DELAY100
+    buttons.o(routines) refers to ships_display.o(routines) for ships
+    display_new.o(routines) refers to fifo.o(routines) for fifo
+    icon.o(routines) refers to display_new.o(routines) for DISPLAY
+    ships_display.o(routines) refers to icon.o(routines) for ship_civil
+    decision_maker.o(routines) refers to mine_viccinity-check.o(routines) for vicinityM
+    decision_maker.o(routines) refers to x_display.o(routines) for XDISPLAY
+    decision_maker.o(routines) refers to delay100.o(routines) for DELAY100
+    x_display.o(routines) refers to fifo.o(routines) for fifo
+
+
+==============================================================================
+
+Removing Unused input sections from the image.
+
+    Removing startup.o(HEAP), (0 bytes).
+    Removing startup.o(.text), (48 bytes).
+    Removing border.o(routines), (296 bytes).
+
+3 unused section(s) (total 344 bytes) removed from the image.
+
+==============================================================================
+
+Image Symbol Table
+
+    Local Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    RESET                                    0x00000000   Section      648  startup.o(RESET)
+    ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
+    ADCInit.s                                0x00000000   Number         0  adcinit.o ABSOLUTE
+    Border.s                                 0x00000000   Number         0  border.o ABSOLUTE
+    Buttons.s                                0x00000000   Number         0  buttons.o ABSOLUTE
+    Calibrator.s                             0x00000000   Number         0  calibrator.o ABSOLUTE
+    ClearPrev.s                              0x00000000   Number         0  clearprev.o ABSOLUTE
+    DELAY100.s                               0x00000000   Number         0  delay100.o ABSOLUTE
+    DISPLAY_NEW.s                            0x00000000   Number         0  display_new.o ABSOLUTE
+    ICON.s                                   0x00000000   Number         0  icon.o ABSOLUTE
+    InitializationOfSSI.s                    0x00000000   Number         0  initializationofssi.o ABSOLUTE
+    MainProgram.s                            0x00000000   Number         0  mainprogram.o ABSOLUTE
+    PrintNumber.s                            0x00000000   Number         0  printnumber.o ABSOLUTE
+    Pulse.s                                  0x00000000   Number         0  pulse.o ABSOLUTE
+    Startup.s                                0x00000000   Number         0  startup.o ABSOLUTE
+    dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
+    decision_maker.s                         0x00000000   Number         0  decision_maker.o ABSOLUTE
+    fifo.s                                   0x00000000   Number         0  fifo.o ABSOLUTE
+    mine_viccinity-check.s                   0x00000000   Number         0  mine_viccinity-check.o ABSOLUTE
+    player2.s                                0x00000000   Number         0  player2.o ABSOLUTE
+    ships_display.s                          0x00000000   Number         0  ships_display.o ABSOLUTE
+    system_timer.s                           0x00000000   Number         0  system_timer.o ABSOLUTE
+    x_display.s                              0x00000000   Number         0  x_display.o ABSOLUTE
+    $v0                                      0x0000026c   Number         0  startup.o(RESET)
+    .text                                    0x00000288   Section        0  heapauxi.o(.text)
+    main                                     0x00000290   Section      436  mainprogram.o(main)
+    $v0                                      0x00000290   Number         0  mainprogram.o(main)
+    routines                                 0x00000444   Section       24  delay100.o(routines)
+    $v0                                      0x00000444   Number         0  delay100.o(routines)
+    routines                                 0x0000045c   Section      172  initializationofssi.o(routines)
+    $v0                                      0x0000045c   Number         0  initializationofssi.o(routines)
+    routines                                 0x00000508   Section      340  printnumber.o(routines)
+    $v0                                      0x00000508   Number         0  printnumber.o(routines)
+    routines                                 0x0000065c   Section      212  adcinit.o(routines)
+    $v0                                      0x0000065c   Number         0  adcinit.o(routines)
+    routines                                 0x00000730   Section      604  calibrator.o(routines)
+    $v0                                      0x00000730   Number         0  calibrator.o(routines)
+    routines                                 0x0000098c   Section      484  buttons.o(routines)
+    $v0                                      0x0000098c   Number         0  buttons.o(routines)
+    routines                                 0x00000b70   Section       80  display_new.o(routines)
+    $v0                                      0x00000b70   Number         0  display_new.o(routines)
+    routines                                 0x00000bc0   Section      300  icon.o(routines)
+    $v0                                      0x00000bc0   Number         0  icon.o(routines)
+    routines                                 0x00000cec   Section      104  clearprev.o(routines)
+    $v0                                      0x00000cec   Number         0  clearprev.o(routines)
+    routines                                 0x00000d54   Section      604  player2.o(routines)
+    $v0                                      0x00000d54   Number         0  player2.o(routines)
+    routines                                 0x00000fb0   Section       72  system_timer.o(routines)
+    $v0                                      0x00000fb0   Number         0  system_timer.o(routines)
+    routines                                 0x00000ff8   Section       24  fifo.o(routines)
+    $v0                                      0x00000ff8   Number         0  fifo.o(routines)
+    routines                                 0x00001010   Section       60  ships_display.o(routines)
+    $v0                                      0x00001010   Number         0  ships_display.o(routines)
+    routines                                 0x0000104c   Section      108  pulse.o(routines)
+    $v0                                      0x0000104c   Number         0  pulse.o(routines)
+    routines                                 0x000010b8   Section      344  decision_maker.o(routines)
+    $v0                                      0x000010b8   Number         0  decision_maker.o(routines)
+    routines                                 0x00001210   Section       56  mine_viccinity-check.o(routines)
+    $v0                                      0x00001210   Number         0  mine_viccinity-check.o(routines)
+    routines                                 0x00001248   Section       84  x_display.o(routines)
+    $v0                                      0x00001248   Number         0  x_display.o(routines)
+    sdata                                    0x0000129c   Section       70  printnumber.o(sdata)
+    Zero                                     0x0000129c   Data           1  printnumber.o(sdata)
+    One                                      0x000012a3   Data           1  printnumber.o(sdata)
+    Two                                      0x000012aa   Data           1  printnumber.o(sdata)
+    Three                                    0x000012b1   Data           1  printnumber.o(sdata)
+    Four                                     0x000012b8   Data           1  printnumber.o(sdata)
+    Five                                     0x000012bf   Data           1  printnumber.o(sdata)
+    Six                                      0x000012c6   Data           1  printnumber.o(sdata)
+    Seven                                    0x000012cd   Data           1  printnumber.o(sdata)
+    Eight                                    0x000012d4   Data           1  printnumber.o(sdata)
+    Nine                                     0x000012db   Data           1  printnumber.o(sdata)
+    STACK                                    0x20000000   Section     1024  startup.o(STACK)
+    StackMem                                 0x20000000   Data           0  startup.o(STACK)
+
+    Global Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    BuildAttributes$$THM_ISAv4$E$P$D$K$B$S$7EM$VFPi3$EXTD16$VFPS$VFMA$PE$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$ROPI$EBA8$STANDARDLIB$REQ8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    __Vectors                                0x00000000   Data           0  startup.o(RESET)
+    Reset_Handler                            0x0000026d   Thumb Code     0  startup.o(RESET)
+    NMI_Handler                              0x00000271   Thumb Code     2  startup.o(RESET)
+    HardFault_Handler                        0x00000273   Thumb Code     2  startup.o(RESET)
+    MemManage_Handler                        0x00000275   Thumb Code     2  startup.o(RESET)
+    BusFault_Handler                         0x00000277   Thumb Code     2  startup.o(RESET)
+    UsageFault_Handler                       0x00000279   Thumb Code     2  startup.o(RESET)
+    SVC_Handler                              0x0000027b   Thumb Code     2  startup.o(RESET)
+    DebugMon_Handler                         0x0000027d   Thumb Code     2  startup.o(RESET)
+    PendSV_Handler                           0x0000027f   Thumb Code     2  startup.o(RESET)
+    SysTick_Handler                          0x00000281   Thumb Code     4  startup.o(RESET)
+    ADC0Seq0_Handler                         0x00000285   Thumb Code     0  startup.o(RESET)
+    ADC0Seq1_Handler                         0x00000285   Thumb Code     0  startup.o(RESET)
+    ADC0Seq2_Handler                         0x00000285   Thumb Code     0  startup.o(RESET)
+    ADC0Seq3_Handler                         0x00000285   Thumb Code     0  startup.o(RESET)
+    ADC1Seq0_Handler                         0x00000285   Thumb Code     0  startup.o(RESET)
+    ADC1Seq1_Handler                         0x00000285   Thumb Code     0  startup.o(RESET)
+    ADC1Seq2_Handler                         0x00000285   Thumb Code     0  startup.o(RESET)
+    ADC1Seq3_Handler                         0x00000285   Thumb Code     0  startup.o(RESET)
+    CAN0_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    CAN1_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    CAN2_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    Comp0_Handler                            0x00000285   Thumb Code     0  startup.o(RESET)
+    Comp1_Handler                            0x00000285   Thumb Code     0  startup.o(RESET)
+    Comp2_Handler                            0x00000285   Thumb Code     0  startup.o(RESET)
+    Ethernet_Handler                         0x00000285   Thumb Code     0  startup.o(RESET)
+    ExtBus_Handler                           0x00000285   Thumb Code     0  startup.o(RESET)
+    FPU_Handler                              0x00000285   Thumb Code     0  startup.o(RESET)
+    Fan0_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    FlashCtl_Handler                         0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortA_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortB_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortC_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortD_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortE_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortF_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortG_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortH_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortJ_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortK_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortL_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortM_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortN_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortP1_Handler                       0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortP2_Handler                       0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortP3_Handler                       0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortP4_Handler                       0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortP5_Handler                       0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortP6_Handler                       0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortP7_Handler                       0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortP_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortQ1_Handler                       0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortQ2_Handler                       0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortQ3_Handler                       0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortQ4_Handler                       0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortQ5_Handler                       0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortQ6_Handler                       0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortQ7_Handler                       0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortQ_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortR_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    GPIOPortS_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    Hibernate_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    I2C0_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    I2C1_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    I2C2_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    I2C3_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    I2C4_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    I2C5_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    I2S0_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    LPC0_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    PECI0_Handler                            0x00000285   Thumb Code     0  startup.o(RESET)
+    PWM0Fault_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    PWM0Generator0_Handler                   0x00000285   Thumb Code     0  startup.o(RESET)
+    PWM0Generator1_Handler                   0x00000285   Thumb Code     0  startup.o(RESET)
+    PWM0Generator2_Handler                   0x00000285   Thumb Code     0  startup.o(RESET)
+    PWM0Generator3_Handler                   0x00000285   Thumb Code     0  startup.o(RESET)
+    PWM1Fault_Handler                        0x00000285   Thumb Code     0  startup.o(RESET)
+    PWM1Generator0_Handler                   0x00000285   Thumb Code     0  startup.o(RESET)
+    PWM1Generator1_Handler                   0x00000285   Thumb Code     0  startup.o(RESET)
+    PWM1Generator2_Handler                   0x00000285   Thumb Code     0  startup.o(RESET)
+    PWM1Generator3_Handler                   0x00000285   Thumb Code     0  startup.o(RESET)
+    Quadrature0_Handler                      0x00000285   Thumb Code     0  startup.o(RESET)
+    Quadrature1_Handler                      0x00000285   Thumb Code     0  startup.o(RESET)
+    Quadrature2_Handler                      0x00000285   Thumb Code     0  startup.o(RESET)
+    SSI0_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    SSI1_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    SSI2_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    SSI3_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    SysCtl_Handler                           0x00000285   Thumb Code     0  startup.o(RESET)
+    Timer0A_Handler                          0x00000285   Thumb Code     0  startup.o(RESET)
+    Timer0B_Handler                          0x00000285   Thumb Code     0  startup.o(RESET)
+    Timer1A_Handler                          0x00000285   Thumb Code     0  startup.o(RESET)
+    Timer1B_Handler                          0x00000285   Thumb Code     0  startup.o(RESET)
+    Timer2A_Handler                          0x00000285   Thumb Code     0  startup.o(RESET)
+    Timer2B_Handler                          0x00000285   Thumb Code     0  startup.o(RESET)
+    Timer3A_Handler                          0x00000285   Thumb Code     0  startup.o(RESET)
+    Timer3B_Handler                          0x00000285   Thumb Code     0  startup.o(RESET)
+    Timer4A_Handler                          0x00000285   Thumb Code     0  startup.o(RESET)
+    Timer4B_Handler                          0x00000285   Thumb Code     0  startup.o(RESET)
+    Timer5A_Handler                          0x00000285   Thumb Code     0  startup.o(RESET)
+    Timer5B_Handler                          0x00000285   Thumb Code     0  startup.o(RESET)
+    UART0_Handler                            0x00000285   Thumb Code     0  startup.o(RESET)
+    UART1_Handler                            0x00000285   Thumb Code     0  startup.o(RESET)
+    UART2_Handler                            0x00000285   Thumb Code     0  startup.o(RESET)
+    UART3_Handler                            0x00000285   Thumb Code     0  startup.o(RESET)
+    UART4_Handler                            0x00000285   Thumb Code     0  startup.o(RESET)
+    UART5_Handler                            0x00000285   Thumb Code     0  startup.o(RESET)
+    UART6_Handler                            0x00000285   Thumb Code     0  startup.o(RESET)
+    UART7_Handler                            0x00000285   Thumb Code     0  startup.o(RESET)
+    USB0_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    WDT_Handler                              0x00000285   Thumb Code     0  startup.o(RESET)
+    WideTimer0A_Handler                      0x00000285   Thumb Code     0  startup.o(RESET)
+    WideTimer0B_Handler                      0x00000285   Thumb Code     0  startup.o(RESET)
+    WideTimer1A_Handler                      0x00000285   Thumb Code     0  startup.o(RESET)
+    WideTimer1B_Handler                      0x00000285   Thumb Code     0  startup.o(RESET)
+    WideTimer2A_Handler                      0x00000285   Thumb Code     0  startup.o(RESET)
+    WideTimer2B_Handler                      0x00000285   Thumb Code     0  startup.o(RESET)
+    WideTimer3A_Handler                      0x00000285   Thumb Code     0  startup.o(RESET)
+    WideTimer3B_Handler                      0x00000285   Thumb Code     0  startup.o(RESET)
+    WideTimer4A_Handler                      0x00000285   Thumb Code     0  startup.o(RESET)
+    WideTimer4B_Handler                      0x00000285   Thumb Code     0  startup.o(RESET)
+    WideTimer5A_Handler                      0x00000285   Thumb Code     0  startup.o(RESET)
+    WideTimer5B_Handler                      0x00000285   Thumb Code     0  startup.o(RESET)
+    uDMA_Error                               0x00000285   Thumb Code     0  startup.o(RESET)
+    uDMA_Handler                             0x00000285   Thumb Code     0  startup.o(RESET)
+    __use_two_region_memory                  0x00000289   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_escrow$2region                 0x0000028b   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_expand$2region                 0x0000028d   Thumb Code     2  heapauxi.o(.text)
+    __main                                   0x00000291   Thumb Code     0  mainprogram.o(main)
+    DELAY100                                 0x00000445   Thumb Code    24  delay100.o(routines)
+    ssi_init                                 0x0000045d   Thumb Code   128  initializationofssi.o(routines)
+    PrintNum                                 0x00000509   Thumb Code   268  printnumber.o(routines)
+    ADC_Handler                              0x0000065d   Thumb Code    16  adcinit.o(routines)
+    ADC0Init                                 0x0000066d   Thumb Code   140  adcinit.o(routines)
+    Calibrator                               0x00000731   Thumb Code   584  calibrator.o(routines)
+    ButtonsHand                              0x0000098d   Thumb Code   270  buttons.o(routines)
+    ButtonsInit                              0x00000a9b   Thumb Code   138  buttons.o(routines)
+    DISPLAY                                  0x00000b71   Thumb Code    68  display_new.o(routines)
+    ship_battle                              0x00000bc1   Thumb Code   196  icon.o(routines)
+    ship_civil                               0x00000c85   Thumb Code   104  icon.o(routines)
+    ClearScreen                              0x00000ced   Thumb Code    92  clearprev.o(routines)
+    player2                                  0x00000d55   Thumb Code   584  player2.o(routines)
+    InitSysTick                              0x00000fb1   Thumb Code    54  system_timer.o(routines)
+    fifo                                     0x00000ff9   Thumb Code    18  fifo.o(routines)
+    ships                                    0x00001011   Thumb Code    54  ships_display.o(routines)
+    PULSE_INIT                               0x0000104d   Thumb Code    78  pulse.o(routines)
+    DECISION                                 0x000010b9   Thumb Code   330  decision_maker.o(routines)
+    vicinityM                                0x00001211   Thumb Code    56  mine_viccinity-check.o(routines)
+    XDISPLAY                                 0x00001249   Thumb Code    72  x_display.o(routines)
+
+
+
+==============================================================================
+
+Memory Map of the image
+
+  Image Entry point : 0x0000026d
+
+  Load Region LR_1 (Base: 0x00000000, Size: 0x000016e4, Max: 0xffffffff, ABSOLUTE)
+
+    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x000012e4, Max: 0xffffffff, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x00000000   0x00000000   0x00000288   Code   RO           12  * RESET               startup.o
+    0x00000288   0x00000288   0x00000006   Code   RO           90    .text               c_w.l(heapauxi.o)
+    0x0000028e   0x0000028e   0x00000002   PAD
+    0x00000290   0x00000290   0x000001b4   Code   RO            7    main                mainprogram.o
+    0x00000444   0x00000444   0x00000018   Code   RO            1    routines            delay100.o
+    0x0000045c   0x0000045c   0x000000ac   Code   RO           19    routines            initializationofssi.o
+    0x00000508   0x00000508   0x00000154   Code   RO           28    routines            printnumber.o
+    0x0000065c   0x0000065c   0x000000d4   Code   RO           32    routines            adcinit.o
+    0x00000730   0x00000730   0x0000025c   Code   RO           36    routines            calibrator.o
+    0x0000098c   0x0000098c   0x000001e4   Code   RO           40    routines            buttons.o
+    0x00000b70   0x00000b70   0x00000050   Code   RO           44    routines            display_new.o
+    0x00000bc0   0x00000bc0   0x0000012c   Code   RO           48    routines            icon.o
+    0x00000cec   0x00000cec   0x00000068   Code   RO           52    routines            clearprev.o
+    0x00000d54   0x00000d54   0x0000025c   Code   RO           56    routines            player2.o
+    0x00000fb0   0x00000fb0   0x00000048   Code   RO           60    routines            system_timer.o
+    0x00000ff8   0x00000ff8   0x00000018   Code   RO           64    routines            fifo.o
+    0x00001010   0x00001010   0x0000003c   Code   RO           68    routines            ships_display.o
+    0x0000104c   0x0000104c   0x0000006c   Code   RO           72    routines            pulse.o
+    0x000010b8   0x000010b8   0x00000158   Code   RO           76    routines            decision_maker.o
+    0x00001210   0x00001210   0x00000038   Code   RO           80    routines            mine_viccinity-check.o
+    0x00001248   0x00001248   0x00000054   Code   RO           84    routines            x_display.o
+    0x0000129c   0x0000129c   0x00000046   Data   RO           27    sdata               printnumber.o
+
+
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x000012e4, Size: 0x00000400, Max: 0xffffffff, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x20000000   0x000012e4   0x00000400   Data   RW           10    STACK               startup.o
+
+
+    Execution Region ER_ZI (Exec base: 0x20000400, Load base: 0x000016e4, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
+
+    **** No section assigned to this execution region ****
+
+
+==============================================================================
+
+Image component sizes
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
+
+       212         56          0          0          0        448   adcinit.o
+       484         76          0          0          0        528   buttons.o
+       604         20          0          0          0        548   calibrator.o
+       104         14          0          0          0        384   clearprev.o
+       344         14          0          0          0        444   decision_maker.o
+        24          0          0          0          0        384   delay100.o
+        80         12          0          0          0        368   display_new.o
+        24          6          0          0          0        336   fifo.o
+       300          0          0          0          0        472   icon.o
+       172         44          0          0          0        416   initializationofssi.o
+       436         40          0          0          0        356   mainprogram.o
+        56          0          0          0          0        388   mine_viccinity-check.o
+       604         20          0          0          0        536   player2.o
+       340         54         70          0          0        452   printnumber.o
+       108         30          0          0          0        372   pulse.o
+        60          6          0          0          0        368   ships_display.o
+       648        620          0       1024          0        740   startup.o
+        72         18          0          0          0        372   system_timer.o
+        84         12          0          0          0        368   x_display.o
+
+    ----------------------------------------------------------------------
+      4756       1042         72       1024          0       8280   Object Totals
+         0          0          0          0          0          0   (incl. Generated)
+         0          0          2          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Member Name
+
+         6          0          0          0          0        152   heapauxi.o
+
+    ----------------------------------------------------------------------
+         8          0          0          0          0        152   Library Totals
+         2          0          0          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
+
+         6          0          0          0          0        152   c_w.l
+
+    ----------------------------------------------------------------------
+         8          0          0          0          0        152   Library Totals
+
+    ----------------------------------------------------------------------
+
+==============================================================================
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
+
+      4764       1042         72       1024          0       6732   Grand Totals
+      4764       1042         72       1024          0       6732   ELF Image Totals
+      4764       1042         72       1024          0          0   ROM Totals
+
+==============================================================================
+
+    Total RO  Size (Code + RO Data)                 4836 (   4.72kB)
+    Total RW  Size (RW Data + ZI Data)              1024 (   1.00kB)
+    Total ROM Size (Code + RO Data + RW Data)       5860 (   5.72kB)
+
+==============================================================================
+

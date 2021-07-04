@@ -1,0 +1,22 @@
+;CHECKS FIFO EMPTY OR NOT
+
+GPIO_PORTA_DATA		EQU		0x400040F0
+SSI0_DR				EQU		0x40008008
+SSI0_SR				EQU		0x4000800C
+;LABEL		DIRECTIVE	VALUE		COMMENT
+			AREA    	routines, READONLY, CODE
+			THUMB
+			EXPORT  	fifo
+				
+fifo		PROC
+			;check fifo if EMPTY OR NOT/ BUSY
+			PUSH	{LR,R1,R0}
+			LDR		R1,=SSI0_SR
+check		LDR		R0,[R1]
+			ANDS	R0,#0x10
+			BNE		check
+			POP     {LR,R1,R0}
+			BX 		LR
+			ENDP
+			ALIGN
+			END			
